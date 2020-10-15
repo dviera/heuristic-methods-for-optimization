@@ -50,10 +50,10 @@ end
 function SA(route; initial_temp, markov_len, cooling)
     
     m = length(route)
-
     new_route = copy(route)
-
     old_cost = total_distance(route)
+    best_route = copy(route)
+    best_distance = 0
     
     temp_hist = []
     push!(temp_hist, initial_temp)
@@ -76,6 +76,8 @@ function SA(route; initial_temp, markov_len, cooling)
 
             
             if new_cost < old_cost
+                best_route = new_route
+                best_distance = new_cost
                 old_cost = new_cost
                 push!(cost_hist, new_cost)
             else
